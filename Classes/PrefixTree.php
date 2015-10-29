@@ -35,9 +35,12 @@ class PrefixTree {
 		if ($trimmedWord === '') {
 			throw new \InvalidArgumentException('$word must not be empty.', 1446122742);
 		}
+		if (array_key_exists($trimmedWord, $this->wordNodes)) {
+			return $this->wordNodes[$trimmedWord];
+		}
 
 		$currentNode = $this->root;
-		$letters = preg_split('/(?<!^)(?!$)/u', $trimmedWord);
+		$letters = str_split($trimmedWord);
 
 		foreach ($letters as $letter) {
 			if ($currentNode->hasChildWithIndex($letter)) {
@@ -50,7 +53,7 @@ class PrefixTree {
 		}
 
 		$currentNode->setWord($trimmedWord);
-		$this->wordNodes[] = $currentNode;
+		$this->wordNodes[$trimmedWord] = $currentNode;
 
 		return $currentNode;
 	}
