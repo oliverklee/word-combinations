@@ -3,6 +3,8 @@ namespace OliverKlee\CodeKata;
 
 /**
  * This class represents a node in a prefix tree or suffix tree.
+ *
+ * Child nodes are uniquely indexed by one-character letters. Nodes can also be associated with words.
  */
 class LetterNode {
 	/**
@@ -57,16 +59,10 @@ class LetterNode {
 	 * @throws \InvalidArgumentException
 	 */
 	public function addChild(LetterNode $node, $index) {
-		$indexLength = mb_strlen($index, 'UTF-8');
-		if ($indexLength !== 1) {
-			throw new \InvalidArgumentException(
-				'$indexLetter must exactly be one characters, but is ' . $indexLength . ' characters.',
-				1446117800
-			);
-		}
-		if (isset($this->children[$index])) {
+		$this->validateIndex($index);
+		if ($this->hasChildWithIndex($index)) {
 			throw new \BadMethodCallException(
-				'Each node may only get at most one child node per index. Current index letter: ' . $indexLength,
+				'Each node may only get at most one child node per index. Current index letter: ' . $index,
 				1446117953
 			);
 		}
@@ -79,6 +75,56 @@ class LetterNode {
 
 		$this->children[$index] = $node;
 		$node->setParent($this);
+	}
+
+	/**
+	 * @param string $index the letter, must be exactly one character
+	 *
+	 * @return bool
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	public function hasChildWithIndex($index) {
+		$this->validateIndex($index);
+
+		return array_key_exists($index, $this->children);
+	}
+
+	/**
+	 * Returns the child for the index $index or null if there is one.
+	 *
+	 * @param string $index the letter, must be exactly one character
+	 *
+	 * @return LetterNode|null
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	public function getChildByIndex($index) {
+		$this->validateIndex($index);
+		if (!$this->hasChildWithIndex($index)) {
+			return null;
+		}
+
+		return $this->children[$index];
+	}
+
+	/**
+	 * Checks that $index is exactly one (UTF-8) letter long and throws an exception otherwise.
+	 *
+	 * @param string $index the index to validate
+	 *
+	 * @return void
+	 *
+	 * @throws \InvalidArgumentException
+	 */
+	private function validateIndex($index) {
+		$indexLength = mb_strlen($index, 'UTF-8');
+		if ($indexLength !== 1) {
+			throw new \InvalidArgumentException(
+				'$indexLetter must exactly be one characters, but is ' . $indexLength . ' characters.',
+				1446117800
+			);
+		}
 	}
 
 	/**

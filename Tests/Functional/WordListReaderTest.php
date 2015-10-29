@@ -10,7 +10,7 @@ class WordListReaderTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @var WordListReader
 	 */
-	private $subject = NULL;
+	private $subject = null;
 
 	protected function setUp() {
 		$this->subject = new WordListReader();

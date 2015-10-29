@@ -10,7 +10,7 @@ class LetterNodeTest extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @var LetterNode
 	 */
-	private $subject = NULL;
+	private $subject = null;
 
 	protected function setUp() {
 		$this->subject = new LetterNode();
@@ -119,6 +119,95 @@ class LetterNodeTest extends \PHPUnit_Framework_TestCase {
 		$this->subject->addChild($child, 'a');
 
 		self::assertSame($this->subject, $child->getParent());
+	}
+
+	/**
+	 * @test
+	 * @expectedException \InvalidArgumentException
+	 */
+	public function hasChildWithIndexForEmptyIndexThrowsException() {
+		$this->subject->hasChildWithIndex('');
+	}
+
+	/**
+	 * @test
+	 * @expectedException \InvalidArgumentException
+	 */
+	public function hasChildWithIndexForTwoLetterIndexThrowsException() {
+		$this->subject->hasChildWithIndex('ig');
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasChildWithIndexForNoChildrenReturnsFalse() {
+		$result = $this->subject->hasChildWithIndex('a');
+
+		self::assertFalse($result);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasChildWithIndexForOnlyChildrenWithDifferentIndexReturnsFalse() {
+		$this->subject->addChild(new LetterNode(), 'n');
+
+		$result = $this->subject->hasChildWithIndex('a');
+
+		self::assertFalse($result);
+	}
+
+	/**
+	 * @test
+	 */
+	public function hasChildWithIndexForChildWithGivenIndexReturnsTrue() {
+		$index = 'h';
+		$this->subject->addChild(new LetterNode(), $index);
+
+		$result = $this->subject->hasChildWithIndex($index);
+
+		self::assertTrue($result);
+	}
+
+	/**
+	 * @test
+	 * @expectedException \InvalidArgumentException
+	 */
+	public function getChildByIndexForEmptyIndexThrowsException() {
+		$this->subject->getChildByIndex('');
+	}
+
+	/**
+	 * @test
+	 * @expectedException \InvalidArgumentException
+	 */
+	public function getChildByIndexForTwoLetterIndexThrowsException() {
+		$this->subject->getChildByIndex('as');
+	}
+
+	/**
+	 * @test
+	 */
+	public function getChildByIndexForNoMatchingChildReturnsNull() {
+		$node = new LetterNode();
+		$this->subject->addChild($node, 'x');
+
+		$result = $this->subject->getChildByIndex('y');
+
+		self::assertNull($result);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getChildByIndexForMatchingChildReturnsMatchingChild() {
+		$index = 'x';
+		$node = new LetterNode();
+		$this->subject->addChild($node, $index);
+
+		$result = $this->subject->getChildByIndex($index);
+
+		self::assertSame($node, $result);
 	}
 
 	/**
