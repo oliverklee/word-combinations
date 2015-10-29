@@ -1,0 +1,17 @@
+{
+    "name": "oliverklee/code-kata-t3dd15",
+    "authors": [
+        {
+            "name": "Oliver Klee",
+            "email": "typo3-coding@oliverklee.de"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "~4.7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "OliverKlee\\CodeKata\\": "Classes/"
+        }
+    }
+}
