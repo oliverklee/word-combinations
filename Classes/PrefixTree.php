@@ -12,6 +12,11 @@ class PrefixTree {
 	private $root = null;
 
 	/**
+	 * @var LetterNode[]
+	 */
+	private $wordNodes = [];
+
+	/**
 	 * The constructor.
 	 */
 	public function __construct() {
@@ -45,7 +50,48 @@ class PrefixTree {
 		}
 
 		$currentNode->setWord($trimmedWord);
+		$this->wordNodes[] = $currentNode;
 
 		return $currentNode;
+	}
+
+	/**
+	 * Finds prefixes within the words added so far.
+	 *
+	 * This method must be called after all words are added.
+	 *
+	 * @return string[][] the prefixes in the form ['foobar' => ['foo, 'foob'], 'foob' => ['foo']]
+	 */
+	public function findPrefixes() {
+		$prefixesForAllWords = [];
+
+		foreach ($this->wordNodes as $wordNode) {
+			$prefixesForWord = $this->findPrefixesForWordNode($wordNode);
+			if ($prefixesForWord !== []) {
+				$prefixesForAllWords[$wordNode->getWord()] = $prefixesForWord;
+			}
+		}
+
+		return $prefixesForAllWords;
+	}
+
+	/**
+	 * @param LetterNode $wordNode
+	 *
+	 * @return string[]
+	 */
+	private function findPrefixesForWordNode(LetterNode $wordNode) {
+		$prefixes = [];
+		$currentNode = $wordNode;
+
+		do {
+			if ($currentNode !== $wordNode && $currentNode->hasWord()) {
+				$prefixes[] = $currentNode->getWord();
+			}
+
+			$currentNode = $currentNode->getParent();
+		} while ($currentNode->getParent() !== null);
+
+		return $prefixes;
 	}
 }

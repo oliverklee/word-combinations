@@ -85,4 +85,123 @@ class PrefixTreeTest extends \PHPUnit_Framework_TestCase {
 
 		self::assertSame($result1, $result2);
 	}
+
+	/**
+	 * @test
+	 */
+	public function findPrefixesWithoutWordsReturnsEmptyArray() {
+		$result = $this->subject->findPrefixes();
+
+		self::assertSame([], $result);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findPrefixesWithOneWordReturnsEmptyArray() {
+		$this->subject->insert('bonjour');
+
+		$result = $this->subject->findPrefixes();
+
+		self::assertSame([], $result);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findPrefixesWithTwoUnrelatedWordsReturnsEmptyArray() {
+		$this->subject->insert('bonjour');
+		$this->subject->insert('hello');
+
+		$result = $this->subject->findPrefixes();
+
+		self::assertSame([], $result);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findPrefixesWithTheSameWordTwoTimesReturnsEmptyArray() {
+		$this->subject->insert('bonjour');
+		$this->subject->insert('bonjour');
+
+		$result = $this->subject->findPrefixes();
+
+		self::assertSame([], $result);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findPrefixesWithOnePrefixOfTheOtherWordsReturnsPrefix() {
+		$this->subject->insert('bon');
+		$this->subject->insert('bonjour');
+
+		$result = $this->subject->findPrefixes();
+
+		self::assertSame(['bonjour' => ['bon']], $result);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findPrefixesWithOnePrefixOfTheOtherWordsInsertedInReverseOrderReturnsPrefix() {
+		$this->subject->insert('bonjour');
+		$this->subject->insert('bon');
+
+		$result = $this->subject->findPrefixes();
+
+		self::assertSame(['bonjour' => ['bon']], $result);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findPrefixesWithOnePrefixOfTheOtherWordsTwoTimesReturnsPrefixOneTime() {
+		$this->subject->insert('bon');
+		$this->subject->insert('bon');
+		$this->subject->insert('bonjour');
+
+		$result = $this->subject->findPrefixes();
+
+		self::assertSame(['bonjour' => ['bon']], $result);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findPrefixesCanFindTwoPrefixesOfTheSameWord() {
+		$this->subject->insert('Ab');
+		$this->subject->insert('Abgas');
+		$this->subject->insert('Abgasreinigung');
+
+		$result = $this->subject->findPrefixes();
+
+		self::assertSame(
+			[
+				'Abgas' => ['Ab'],
+				'Abgasreinigung' => ['Abgas', 'Ab'],
+			],
+			$result
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function findPrefixesCanFindOnePrefixOfTwoWords() {
+		$this->subject->insert('Ab');
+		$this->subject->insert('Abfall');
+		$this->subject->insert('Abgas');
+
+		$result = $this->subject->findPrefixes();
+
+		self::assertSame(
+			[
+				'Abfall' => ['Ab'],
+				'Abgas' => ['Ab'],
+			],
+			$result
+		);
+	}
 }
