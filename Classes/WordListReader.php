@@ -19,7 +19,7 @@ class WordListReader
 
         $content = file_get_contents($fileName);
         if ($content === '') {
-            return array();
+            return [];
         }
         $rawWords = explode("\n", $content);
 
