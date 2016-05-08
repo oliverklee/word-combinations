@@ -7,10 +7,10 @@ $words = $wordListReader->read(__DIR__ . '/../Resources/Private/Dictionaries/bri
 
 $prefixTree = new \OliverKlee\CodeKata\PrefixTree();
 foreach ($words as $word) {
-	$prefixTree->insert($word);
+    $prefixTree->insert($word);
 }
 $prefixSets = $prefixTree->findPrefixes();
 
 foreach ($prefixSets as $word => $prefixSet) {
-	echo $word . ': ' . implode(', ', $prefixSet) . "\n";
+    echo $word . ': ' . implode(', ', $prefixSet) . "\n";
 }
