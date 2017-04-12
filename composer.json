@@ -6,8 +6,11 @@
             "email": "typo3-coding@oliverklee.de"
         }
     ],
+    "require": {
+        "php": "~7.0.0 || ~7.1.0"
+    },
     "require-dev": {
-        "phpunit/phpunit": "~4.8.0"
+        "phpunit/phpunit": "^6.0.13"
     },
     "autoload": {
         "psr-4": {

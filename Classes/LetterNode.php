@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace OliverKlee\CodeKata;
 
 /**
@@ -44,7 +46,7 @@ class LetterNode
     /**
      * @return LetterNode[] the children using the letters as keys
      */
-    public function getChildren()
+    public function getChildren(): array
     {
         return $this->children;
     }
@@ -62,7 +64,7 @@ class LetterNode
      * @throws \BadMethodCallException
      * @throws \InvalidArgumentException
      */
-    public function addChild(LetterNode $node, $index)
+    public function addChild(LetterNode $node, string $index)
     {
         $this->validateIndex($index);
         if ($this->hasChildWithIndex($index)) {
@@ -89,7 +91,7 @@ class LetterNode
      *
      * @throws \InvalidArgumentException
      */
-    public function hasChildWithIndex($index)
+    public function hasChildWithIndex(string $index): bool
     {
         $this->validateIndex($index);
 
@@ -105,7 +107,7 @@ class LetterNode
      *
      * @throws \InvalidArgumentException
      */
-    public function getChildByIndex($index)
+    public function getChildByIndex(string $index)
     {
         $this->validateIndex($index);
         if (!$this->hasChildWithIndex($index)) {
@@ -124,7 +126,7 @@ class LetterNode
      *
      * @throws \InvalidArgumentException
      */
-    private function validateIndex($index)
+    private function validateIndex(string $index)
     {
         $indexLength = mb_strlen($index, 'UTF-8');
         if ($indexLength !== 1) {
@@ -138,7 +140,7 @@ class LetterNode
     /**
      * @return bool
      */
-    public function isLeaf()
+    public function isLeaf(): bool
     {
         return count($this->children) === 0;
     }
@@ -146,7 +148,7 @@ class LetterNode
     /**
      * @return string
      */
-    public function getWord()
+    public function getWord(): string
     {
         return $this->word;
     }
@@ -160,7 +162,7 @@ class LetterNode
      *
      * @throws \InvalidArgumentException
      */
-    public function setWord($word)
+    public function setWord(string $word)
     {
         if ($word === '') {
             throw new \InvalidArgumentException('$word must not be empty.', 1446121292);
@@ -172,7 +174,7 @@ class LetterNode
     /**
      * @return bool
      */
-    public function hasWord()
+    public function hasWord(): bool
     {
         return $this->getWord() !== '';
     }

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace OliverKlee\CodeKata;
 
 /**
@@ -11,7 +13,7 @@ class WordListReader
      *
      * @return string[]
      */
-    public function read($fileName)
+    public function read(string $fileName): array
     {
         if (!file_exists($fileName)) {
             throw new \RuntimeException('File doesn\'t exists');

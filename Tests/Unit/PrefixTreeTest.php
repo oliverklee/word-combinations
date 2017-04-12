@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace OliverKlee\CodeKata\Tests\Unit;
 
 use OliverKlee\CodeKata\LetterNode;
@@ -7,7 +9,7 @@ use OliverKlee\CodeKata\PrefixTree;
 /**
  * Testcase.
  */
-class PrefixTreeTest extends \PHPUnit_Framework_TestCase
+class PrefixTreeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var PrefixTree

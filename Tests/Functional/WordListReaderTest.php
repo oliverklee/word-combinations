@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace OliverKlee\CodeKata\Tests\Functional;
 
 use OliverKlee\CodeKata\WordListReader;
@@ -6,7 +8,7 @@ use OliverKlee\CodeKata\WordListReader;
 /**
  * Testcase.
  */
-class WordListReaderTest extends \PHPUnit_Framework_TestCase
+class WordListReaderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var WordListReader

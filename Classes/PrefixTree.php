@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace OliverKlee\CodeKata;
 
 /**
@@ -32,7 +34,7 @@ class PrefixTree
      *
      * @throws \InvalidArgumentException
      */
-    public function insert($word)
+    public function insert(string $word)
     {
         $trimmedWord = trim($word);
         if ($trimmedWord === '') {
@@ -68,7 +70,7 @@ class PrefixTree
      *
      * @return string[][] the prefixes in the form ['foobar' => ['foo, 'foob'], 'foob' => ['foo']]
      */
-    public function findPrefixes()
+    public function findPrefixes(): array
     {
         $prefixesForAllWords = [];
 
@@ -87,7 +89,7 @@ class PrefixTree
      *
      * @return string[]
      */
-    private function findPrefixesForWordNode(LetterNode $wordNode)
+    private function findPrefixesForWordNode(LetterNode $wordNode): array
     {
         $prefixes = [];
         $currentNode = $wordNode;
