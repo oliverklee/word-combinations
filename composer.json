@@ -1,6 +1,7 @@
 {
     "name": "oliverklee/word-combinations",
     "description": "Programming exercise (or coding kata) about finding words that are the concatenation of two other words.",
+    "license": "GPL-3.0+",
     "authors": [
         {
             "name": "Oliver Klee",
