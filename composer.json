@@ -1,5 +1,6 @@
 {
-    "name": "oliverklee/code-kata-t3dd15",
+    "name": "oliverklee/word-combinations",
+    "description": "Programming exercise (or coding kata) about finding words that are the concatenation of two other words.",
     "authors": [
         {
             "name": "Oliver Klee",
