@@ -1,6 +1,11 @@
 # Word combinations TDD kata
 
-[![Flattr this git repo](https://button.flattr.com/flattr-badge-large.png)](https://flattr.com/submit/auto?fid=45y2xw&url=https%3A%2F%2Fgithub.com%2Foliverklee%2Fword-combinations)
+[![Build Status](https://travis-ci.org/oliverklee/word-combinations.svg?branch=master)](https://travis-ci.org/oliverklee/word-combinations)
+[![Latest Stable Version](https://poser.pugx.org/oliverklee/word-combinations/v/stable.svg)](https://packagist.org/packages/oliverklee/word-combinations)
+[![Total Downloads](https://poser.pugx.org/oliverklee/word-combinations/downloads.svg)](https://packagist.org/packages/oliverklee/word-combinations)
+[![Latest Unstable Version](https://poser.pugx.org/oliverklee/word-combinations/v/unstable.svg)](https://packagist.org/packages/oliverklee/word-combinations)
+[![License](https://poser.pugx.org/oliverklee/word-combinations/license.svg)](https://packagist.org/packages/oliverklee/word-combinations)
+
 
 This is a programming exercise (or coding kata) about finding words that are the concatenation of two other words.
 
