@@ -1,13 +1,28 @@
 {
     "name": "oliverklee/word-combinations",
     "description": "Programming exercise (or coding kata) about finding words that are the concatenation of two other words.",
-    "license": "GPL-3.0+",
+    "type": "project",
+    "keywords": [
+        "tdd",
+        "kata",
+        "example",
+        "exercise",
+        "words"
+    ],
+    "homepage": "https://github.com/oliverklee/tdd-reader",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Oliver Klee",
-            "email": "typo3-coding@oliverklee.de"
+            "email": "typo3-coding@oliverklee.de",
+            "homepage": "https://www.oliverklee.de/",
+            "role": "developer"
         }
     ],
+    "support": {
+        "source": "https://github.com/oliverklee/word-combinations",
+        "issues": "https://github.com/oliverklee/word-combinations/issues"
+    },
     "require": {
         "php": "~7.0.0 || ~7.1.0 | ~7.2.0"
     },
@@ -17,6 +32,11 @@
     "autoload": {
         "psr-4": {
             "OliverKlee\\CodeKata\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OliverKlee\\CodeKata\\Tests\\": "Tests/"
         }
     }
 }
